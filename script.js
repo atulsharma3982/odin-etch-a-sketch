@@ -9,12 +9,10 @@ function createPixel(size) {
 
 function getNoOfPixels(e) {
     if (e.target.tagName === "BUTTON") {
-        const noOfPixels = parseInt(prompt("How many pixels do want each side??"));
+        let noOfPixels = parseInt(prompt("How many pixels do want each side??"));
+        noOfPixels = (noOfPixels < 129) ? noOfPixels : 128;
         const Container = document.querySelector(".container");
-        console.log(Container)
         Container.innerHTML = '';
-        console.log(Container)
-        console.log(noOfPixels)
         createSheet(noOfPixels);
         const container = document.querySelector(".container");
         container.addEventListener("dblclick", startColor);
@@ -22,10 +20,14 @@ function getNoOfPixels(e) {
 }
 
 function draw(e) {
-    console.log("working");
     if (e.target.classList.contains("box")) {
         e.target.classList.remove("oldColor");
-        e.target.classList.add("newColor")
+        // e.target.style.backgroundColor = "aqua";
+        const red = Math.floor(Math.random() * 256);
+        const blue = Math.floor(Math.random() * 256);
+        const green = Math.floor(Math.random() * 256);
+        console.log(`rgb(${red} ${blue} ${green})`);
+        e.target.style.backgroundColor = `rgb(${red} ${blue} ${green})`;
     }
 }
 
